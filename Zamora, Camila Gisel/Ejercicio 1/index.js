@@ -10,8 +10,13 @@ app.get("/", (req, res) => {
     res.status(200).send("Hola mundo")
 })
 
-app.post("/calcular", (req, res) => {
+app.post("/rectangulos", (req, res) => {
     const { base, altura } = req.body
+
+    if (!base || !altura) {
+        res.status(400).send("Datos requeridos")
+        return
+    }
 
     const perimetro = (base + altura) * 2
     const superficie= base * altura
@@ -23,18 +28,16 @@ app.post("/calcular", (req, res) => {
         superficie
     })
 
-    res.send("Calculo guardado")
+    res.send("Rectangulo calculado y guardado")
 })
 
-app.get("/consultar", (req, res) => {
-const datos = resultados.map((r) => {
-    const tipo = r.base === r.altura ? "cuadrado" : "rectangulo";
-    return { ...r, tipo };
+app.get("/rectangulos", (req, res) => {
+    const datos = resultados.map((r) => {
+        const tipo = r.base === r.altura ? "cuadrado" : "rectangulo";
+        return { ...r, tipo };
+    });
+    res.json(datos);
 });
-res.json(datos);
-});
-
-
 
 const port= 3000
 app.listen(port,() => {

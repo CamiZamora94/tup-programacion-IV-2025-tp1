@@ -1,0 +1,13 @@
+GET http://localhost:3000
+
+###
+POST http://localhost:3000/alumnos
+Content-Type:application/json
+
+{
+    "nombre": "camila",
+    "notas": [8,9,10]
+}
+
+###
+GET http://localhost:3000/alumnos
